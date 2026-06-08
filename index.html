@@ -21,9 +21,27 @@
     }
   </style>
 </head>
+
 <body>
+
+  <!-- 🔊 Auto-play soundbite -->
+  <audio id="sound" src="ezekiel-25-17_pulpfiction.mp3"></audio>
+
   <a href="https://discord.gg/grkAwQ9W">
     <img src="Click_I_Dare.jpg" alt="Click on me, I dare you">
   </a>
+
+  <script>
+    window.onload = () => {
+      const audio = document.getElementById("sound");
+      audio.volume = 1.0;
+
+      audio.play().catch(() => {
+        // If browser blocks autoplay, play on first click
+        document.body.addEventListener("click", () => audio.play(), { once: true });
+      });
+    };
+  </script>
+
 </body>
 </html>
