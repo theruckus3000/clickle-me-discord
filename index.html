@@ -24,23 +24,31 @@
 
 <body>
 
-  <!-- 🔊 Auto-play soundbite -->
+  <!-- 🔊 Soundbite -->
   <audio id="sound" src="ezekiel-25-17_pulpfiction.mp3"></audio>
 
-  <a href="https://discord.gg/grkAwQ9W">
-    <img src="Click_I_Dare.jpg" alt="Click on me, I dare you">
-  </a>
+  <img id="clickImage" src="Click_I_Dare.jpg" alt="Click on me, I dare you">
 
   <script>
-    window.onload = () => {
-      const audio = document.getElementById("sound");
-      audio.volume = 1.0;
+    const audio = document.getElementById("sound");
+    const img = document.getElementById("clickImage");
+    let clickCount = 0;
 
-      audio.play().catch(() => {
-        // If browser blocks autoplay, play on first click
-        document.body.addEventListener("click", () => audio.play(), { once: true });
-      });
-    };
+    img.addEventListener("click", () => {
+      clickCount++;
+
+      if (clickCount === 1) {
+        // First click → play sound
+        audio.volume = 1.0;
+        audio.play().catch(() => {
+          // If autoplay blocked, play on next click
+          audio.play();
+        });
+      } else if (clickCount === 2) {
+        // Second click → open Discord invite
+        window.location.href = "https://discord.gg/grkAwQ9W";
+      }
+    });
   </script>
 
 </body>
